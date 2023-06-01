@@ -1,8 +1,8 @@
-import { Navigate } from "react-router-dom";
 import { saveUser } from "./user.store";
 
 
-export const loginUser = (userDetails: any) => {
+export const loginUser = (userDetails: any, navigate:any) => {
+
 
     return async(dispatch:any) => {
         const userPayload = JSON.stringify(userDetails)
@@ -24,9 +24,16 @@ export const loginUser = (userDetails: any) => {
                
              console.log('userData',userData)
             dispatch(saveUser({userData}))
-            {userData.type == 'admin' && (
-                <Navigate to="/admin" replace={true} />
-              )}
+            if(userData.type === "user"){
+                navigate('/user')
+            }else if(userData.type === 'doctor') {
+                navigate('/doctor')
+            }else if(userData.type === 'admin') {
+                navigate('/admin')
+            }else {
+                navigate('/')
+            }
+            
         }else {
             console.log('res err', msg)
         }

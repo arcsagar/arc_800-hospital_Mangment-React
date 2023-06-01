@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import mainRouter from "./mainRouter/mainRouter";
 function App() {
 
-  const { userData } = useSelector((state: any) => state.user);
 
-  console.log("userData", userData);
 
 
  

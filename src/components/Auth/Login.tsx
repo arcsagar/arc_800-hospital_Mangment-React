@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../mainStore/user/user-action';
-import { Navigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  
+  const navigate = useNavigate();
+  
     const dispatch: any = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,12 +23,12 @@ const Login = () => {
     e.preventDefault();
     // Perform login logic here
     console.log(email, password)
-   { <Navigate to="/admin"  />}
+const userInfo = {
+  email,
+  password
+};
     dispatch(
-        loginUser({
-            email,
-            password
-        })
+        loginUser(userInfo,navigate)
       );
   };
 
