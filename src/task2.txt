@@ -1,0 +1,6 @@
+
+store for event
+Redux connect 
+form validation 
+form dispatch
+SetAppointment useSelector  ==> evenet = > fullcalendar
