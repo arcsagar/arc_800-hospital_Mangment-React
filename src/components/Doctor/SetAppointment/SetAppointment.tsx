@@ -10,7 +10,23 @@ import {
   formatDate,
 } from '@fullcalendar/core'
 import { INITIAL_EVENTS, createEventId } from '../../../FullCalendarCommon/utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEvents, saveEvent } from '../../../mainStore/calendar/calendar-action'
+import { useEffect } from 'react'
 const SetAppointment = () => {
+  const { userData } = useSelector((state: any) => state.user);
+  const { events } = useSelector((state: any) => state.calendar);
+  
+  const dispatch: any = useDispatch();
+
+
+  console.log('events from setAp',events)
+  useEffect(() => {
+    if(userData && userData.id){
+      dispatch(getEvents(userData.id))
+    }
+  },[])
+
   const renderEventContent = (eventContent: EventContentArg) => {
     return (
       <>
@@ -20,19 +36,26 @@ const SetAppointment = () => {
     )
   }
   const handleDateSelect = (selectInfo: DateSelectArg) => {
+  
     let title = prompt('Please enter a new title for your event')
     let calendarApi = selectInfo.view.calendar
 
     calendarApi.unselect() // clear date selection
 
+    const newEvent:any = {
+      id: createEventId(),
+      title,
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: selectInfo.allDay,
+      userId: userData.id
+    }
+    console.log('newEvent',newEvent);
+
     if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      })
+      dispatch(saveEvent(newEvent));
+      calendarApi.addEvent(newEvent)
+
     }
   }
 
@@ -64,11 +87,12 @@ const SetAppointment = () => {
       selectMirror={true}
       dayMaxEvents={true}
       // weekends={this.state.weekendsVisible}
-      initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+      // initialEvents={events} // alternatively, use the `events` setting to fetch from a feed
       select={handleDateSelect}
       eventContent={renderEventContent} // custom render function
       eventClick={handleEventClick}
       eventsSet={handleEvents}
+      events={events}
       />
         </div>
     )
