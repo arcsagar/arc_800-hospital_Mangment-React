@@ -87,7 +87,7 @@ const SetAppointment = () => {
       selectMirror={true}
       dayMaxEvents={true}
       // weekends={this.state.weekendsVisible}
-      // initialEvents={events} // alternatively, use the `events` setting to fetch from a feed
+      initialEvents={events} // alternatively, use the `events` setting to fetch from a feed
       select={handleDateSelect}
       eventContent={renderEventContent} // custom render function
       eventClick={handleEventClick}

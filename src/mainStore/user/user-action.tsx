@@ -1,4 +1,4 @@
-import { saveUser } from "./user.store";
+import { events, saveUser } from "./user.store";
 
 
 export const loginUser = (userDetails: any, navigate:any) => {
@@ -41,3 +41,38 @@ export const loginUser = (userDetails: any, navigate:any) => {
     }
 }
 
+
+export const allEvents = () => {
+    return async (dispatch:any) => {
+
+        const allEvents = await fetch('http://localhost:3001/allevents');
+        const allEventsRes = await allEvents.json()
+
+        console.log('allEventsRes',allEventsRes);
+
+        dispatch(events({events: allEventsRes.events }))
+    }
+}
+
+export const bookAppointment = (event:any, userId:any) => {
+
+    return async (dispatch:any) => {
+
+        const bookAppointmentPayload = JSON.stringify({
+            ...event,
+            bookingId: userId
+        })
+        const bookAppointmentApi:any = await fetch('http://localhost:3001/bookAppointment',{
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: bookAppointmentPayload
+           }).catch((err) => {
+                   console.log('server err',err)
+           });
+
+        const bookAppointmentRes = await bookAppointmentApi.json()
+        console.log('bookAppointmentRes',bookAppointmentRes)
+    }
+}
