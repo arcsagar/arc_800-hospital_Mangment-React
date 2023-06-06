@@ -4,7 +4,8 @@ const userStore = createSlice({
     name: 'userStore',
     initialState: {
         userData: {},
-        events: []
+        events: [],
+        bookedAppointment: []
     },
     reducers: {
         saveUser: (state, action) => {
@@ -13,9 +14,12 @@ const userStore = createSlice({
         },
         events: (state,action) => {
             state.events = action.payload.events
-        }
+        },
+        bookedAppointment:(state,action) => {
+            state.bookedAppointment = action.payload.bookedAppointment
+        },
     }
 });
 
-export const { saveUser, events } = userStore.actions;
+export const { saveUser, events, bookedAppointment } = userStore.actions;
 export default userStore;
