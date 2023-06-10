@@ -6,7 +6,7 @@ describe('first test',() => {
   it('2+2 should be true ', () => {
       const a =2 ;
       const b = 2 ;
-      expect(a==b).toBeFalsy();
+      expect(a==b).toBeTruthy();
   })
 
   it('3 == 2 should be false ', () => {
