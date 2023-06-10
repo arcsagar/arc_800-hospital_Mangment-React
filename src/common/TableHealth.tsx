@@ -1,9 +1,14 @@
-const TableHealth: React.FC<{
+import React from "react";
+
+type TableHealthProps = {
   tHead: string[];
   tBody: any;
-}> = (props) => {
+};
+
+const TableHealth: React.FC<TableHealthProps> = (props) => {
   const { tHead, tBody } = props;
-  const tHeadContent = tHead.map((tHeadValue: any, index: any) => (
+
+  const tHeadContent = tHead.map((tHeadValue, index) => (
     <th key={index} className="py-2 px-4">
       {tHeadValue}
     </th>
@@ -11,13 +16,14 @@ const TableHealth: React.FC<{
 
   const tBodyContent = tBody.map((tBodyValue: any) => (
     <tr key={tBodyValue.id}>
-      <td className="py-2 px-4">{tBodyValue[tHead[0]]}</td>
-      <td className="py-2 px-4">{tBodyValue[tHead[1]]}</td>
-      <td className="py-2 px-4">{tBodyValue[tHead[2]]}</td>
-      <td className="py-2 px-4">{tBodyValue[tHead[3]]}</td>
-      <td className="py-2 px-4">{tBodyValue[tHead[4]]}</td>
+      {tHead.map((columnName, index) => (
+        <td key={index} className="py-2 px-4">
+          {tBodyValue[columnName]}
+        </td>
+      ))}
     </tr>
   ));
+
   return (
     <div>
       <table className="border-collapse border border-gray-300">
