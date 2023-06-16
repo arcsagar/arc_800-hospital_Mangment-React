@@ -18,11 +18,12 @@ export const loginUser = (userDetails: any, navigate:any) => {
         
         if(userRes){
             
-        const {userData, status, msg} = await userRes.json();
+        const {userData, status, msg, token} = await userRes.json();
      
         if(status === 200){
-               
-             console.log('userData',userData)
+            console.log('token',token)
+            localStorage.setItem('token',token)
+ 
             dispatch(saveUser({userData}))
             if(userData.type === "user"){
                 navigate('/user')
