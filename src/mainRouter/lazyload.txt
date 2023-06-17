@@ -9,12 +9,11 @@ import BookAppointment from "../components/Patient/BookAppointment/BookAppointme
 import DoctorProfile from "../components/Doctor/Profile/DoctorProfile";
 import DoctorAppointment from "../components/Doctor/MyAppointment/DoctorAppointment";
 import SetAppointment from "../components/Doctor/SetAppointment/SetAppointment";
-
 import { Suspense, lazy } from "react";
 
-const UserComponentMethod = lazy(() =>  import('../MainComponent/UserComponent'))
-const DoctorComponentMethod = lazy(() => import('../MainComponent/DoctorComponent'));
-const AdminComponentMethod = lazy(() => import('../MainComponent/AdminComponent'));
+// const AdminMainCompoment = lazy(() => import ('../MainComponent/AdminMainCompoment'));
+// const DoctorMainComponent = lazy(() => import ('../DoctorMainComponent/DoctorMainComponent'));
+// const MainComponent = lazy(() => import('../MainComponent/MainComponent'));
  const mainRouter = createBrowserRouter([
     {
       path: "/",
@@ -22,7 +21,7 @@ const AdminComponentMethod = lazy(() => import('../MainComponent/AdminComponent'
     },
     {
       path: '/admin',
-      element: <Suspense><AdminComponentMethod /></Suspense>,
+      element: <Suspense fallback={<h1>....loading</h1>}><AdminMainCompoment /></Suspense>,
       children: [
         {
           path: "/admin",
@@ -40,7 +39,7 @@ const AdminComponentMethod = lazy(() => import('../MainComponent/AdminComponent'
     },
     {
       path: '/user',
-      element: <Suspense><UserComponentMethod /></Suspense>,
+      element: <Suspense> <MainComponent /></Suspense>,
       children: [
         {
           path: "/user",
@@ -58,7 +57,7 @@ const AdminComponentMethod = lazy(() => import('../MainComponent/AdminComponent'
     },
     {
       path: '/doctor',
-      element: <Suspense><DoctorComponentMethod /></Suspense>,
+      element: <Suspense><DoctorMainComponent /></Suspense>,
       children: [
         {
           path: "/doctor",

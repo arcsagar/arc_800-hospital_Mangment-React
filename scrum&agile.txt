@@ -1,0 +1,21 @@
+scrum  = CPO , SM  , PO  
+
+sprint  = life cylcle of current work  = 1 week - 4 week . golden spot 2week    
+
+
+tickiting system  = module based work 
+
+
+module = login 
+
+features 
+1)form login
+2) backend 
+3) API 
+4) API database
+5) Call API from front ENd
+6) store data in front 
+7) User Auth
+
+
+PO = ticket/ feature = feature description 
